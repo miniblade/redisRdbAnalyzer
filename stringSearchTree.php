@@ -16,7 +16,7 @@ const CL_SIZE="size";
 const CL_PREFIX="prefix";
 const CL_RATE="rate";
 file_put_contents($logFile,"begin");
-$fileName=RESULT_CSV;
+$fileName=TEST_CSV;
 
 class Node{
     public $info=[];
@@ -35,6 +35,7 @@ class Node{
        return "";
    }
 }
+
 ini_set('memory_limit','4000M');
 
 //基础单词查找树
