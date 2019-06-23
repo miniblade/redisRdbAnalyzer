@@ -1,0 +1,10 @@
+database,type,key,size_in_bytes,encoding,num_elements,len_largest_element,expiry
+0,string,noticed_feed_279245197,512,string,401,401,
+0,string,noticed_feed_266084679,128,string,55,55,
+0,string,user_works_0_103953827_20_0_pro_lock,112,string,8,8,2019-06-19T05:37:49.445000
+0,string,cd6270926e7a64fc7e8588222ccca27d,168,string,46,46,2019-06-18T11:53:20.291000
+0,string,lives_cachepro_new_162384576_pro_lock,120,string,8,8,2019-06-19T01:53:59.214000
+0,string,live_cachepro_user_info_188155503_pro,1656,string,1507,1507,2019-06-19T07:26:10.010000
+0,string,live_cachepro_feed_info_api_87374344_pro_lock,128,string,8,8,2019-06-19T09:48:19.721000
+0,string,high_risk_user:97957514_pro_lock,112,string,8,8,2019-06-19T10:02:04.963000
+0,string,live_cachepro_feed_info_api_69300452_pro_lock,96,string,8,8,
