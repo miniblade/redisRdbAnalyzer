@@ -5,6 +5,8 @@
  * Date: 2019/6/20
  * Time: 上午9:51
  */
+ini_set('memory_limit','4000M');
+
 $logFile="tree.log";
 const RESULT_CSV="result.csv";
 const TEST_CSV="test.csv";
@@ -15,6 +17,7 @@ const CL_KEY_NUM="keyNum";
 const CL_SIZE="size";
 const CL_PREFIX="prefix";
 const CL_RATE="rate";
+
 file_put_contents($logFile,"begin");
 $fileName=TEST_CSV;
 
@@ -36,7 +39,6 @@ class Node{
    }
 }
 
-ini_set('memory_limit','4000M');
 
 //基础单词查找树
 //目标输出相似keys数,相似度策略 字符元素
@@ -44,7 +46,7 @@ ini_set('memory_limit','4000M');
 
 $time1=microtime(true);
 const MAX_LEVEL=10;
-$node=new Node();//TODO ["level"=>0,"c1"=>["level"=>1,"totalSize"=>size,"keyNum"=>num,prefix="prefix","c2"=>[]]]
+$node=new Node();
 //输出keys ,size_in_bytes
 $lines =file($fileName,FILE_IGNORE_NEW_LINES);
 static $count=0;
@@ -68,20 +70,9 @@ echo "showLines".PHP_EOL;
 echo "info:".implode( ',',$node->info).";nextNodeNum:".count($node->next).PHP_EOL;
 $node->showLine($node->info['size'],$logFile);
 
-function showRet($node,$level=50){
-    echo "end".PHP_EOL;
-    var_dump($node);
-    echo json_encode((array)$node,JSON_UNESCAPED_UNICODE).PHP_EOL;
-}
 $spendTime=(microtime(true)-$time1)*1000;
 echo "sendTime:$spendTime ms".PHP_EOL;
 
-function showRetI($node,$level,$curLevel){
-    foreach($node as $info){
-
-    }
-
-}
 
 /**向结果$ret中插入key,记录key size
  * -----------------
