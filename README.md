@@ -7,6 +7,7 @@ redis 内存分析工具和实战
     来分析Redis一次内存快照中(即rdb文件内),所有key的使用情况和重点分布。
     当前已有的rdb分析工具主要有：开源的rdb-tool工具，能将rdb分解为类似redis_rdb.csv文件中格式：
     database,type,key,size_in_bytes,encoding,num_elements,len_largest_element,expiry;
+docker-compose  -f /Users/blade/docker/elastic_cluster.yml up -d
     对于上百万key的redis分析哪种key占内存多少，仍然是个难以处理的过程。即便付费的GUI for Redis,也未能解决，如何定位这百万key中，
     代码中的哪个key占用内存最多。github中其它rdb工具也类似，偏重解析，而非分析。
     
@@ -67,7 +68,7 @@ redis 内存分析工具和实战
         cat memory.csv|awk -F, '{print $3 "," $4}'>test.csv
 ### stringSearchTree解析csv文件
         
-      php stringSearchTree.php >result10.info 
+      php stringSearchTree.php test.csv >result10.info 
       注10表示分析了key的前10个字符，若有需要可以分析更多的，不过时间消耗大致n*1.5倍
       格式：level,keyNum,size_by_bytes,prefix,rate
            前缀字符个数,此中统计key数量，总计内存大小，前缀，占总内存百分比
