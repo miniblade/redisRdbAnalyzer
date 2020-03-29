@@ -5,7 +5,7 @@
  * Date: 2019/6/20
  * Time: 上午9:51
  */
-ini_set('memory_limit','4000M');
+ini_set('memory_limit','8000M');
 
 $logFile="tree.log";
 const RESULT_CSV="result.csv";
@@ -44,6 +44,7 @@ class Node{
 //层级订成100,最多100
 
 $time1=microtime(true);
+//分析前缀最长长度，消耗时间成倍增长
 const MAX_LEVEL=30;
 $node=new Node();
 //输出keys ,size_in_bytes
