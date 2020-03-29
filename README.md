@@ -63,7 +63,7 @@ docker-compose  -f /Users/blade/docker/elastic_cluster.yml up -d
         pip install rdbtools
     解析：
         rdb -c memory dump.rdb > memory.csv
-   注意：这一步是目前耗时最多的，解析出来的key还有中文乱码；key还可能包好逗号
+    注意：这一步是目前耗时最多的，解析出来的key还有中文乱码；key还可能包好逗号
         分片处理，每个分片的结果实测是大致相同的。(mac)   
         split -b 1024m memory.csv
         生成 xaa,xab ...等分片  
