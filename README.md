@@ -57,15 +57,20 @@ docker-compose  -f /Users/blade/docker/elastic_cluster.yml up -d
     远程导出rdb文件到本地，cpu有消耗，大小有压缩有内存1/8大小，对网络消耗一般可接受。
     不确定可以监视着完成
     redis-cli -h -p -a --rdb dump.rdb
+    注意：在内网导出，速度会快，不容易中断；压缩为tar.gz，压缩为30%；传到本地会更快
 ### 解析二进制rdb文件到csv文件
     安装rdb_tool: 
         pip install rdbtools
     解析：
         rdb -c memory dump.rdb > memory.csv
+   注意：这一步是目前耗时最多的，解析出来的key还有中文乱码；key还可能包好逗号
+        分片处理，每个分片的结果实测是大致相同的。(mac)   
+        split -b 1024m memory.csv
+        生成 xaa,xab ...等分片  
         格式：database,type,key,size_in_bytes,encoding,num_elements,len_largest_element,expiry
         memory.csv 中keys可能有逗号，这样的key单独过滤掉。
-    过滤 memory.csv 为 key,size_in_bytes格式
-        cat memory.csv|awk -F, '{print $3 "," $4}'>test.csv
+    过滤 memory.csv 为 key,size_in_bytes格式;转换 key中的逗号为"|"
+        cat memory.csv|awk -F, csv.awk>test.csv
 ### stringSearchTree解析csv文件
         
       php stringSearchTree.php test.csv >result10.info 

@@ -17,9 +17,8 @@ const CL_KEY_NUM="keyNum";
 const CL_SIZE="size";
 const CL_PREFIX="prefix";
 const CL_RATE="rate";
-
 file_put_contents($logFile,"begin");
-$fileName=TEST_CSV;
+$fileName= $argv[1];
 
 class Node{
     public $info=[];
@@ -45,13 +44,15 @@ class Node{
 //层级订成100,最多100
 
 $time1=microtime(true);
-const MAX_LEVEL=10;
+const MAX_LEVEL=30;
 $node=new Node();
 //输出keys ,size_in_bytes
 $lines =file($fileName,FILE_IGNORE_NEW_LINES);
 static $count=0;
 
 foreach($lines as $line){
+    //过滤空行
+    if(empty($line)){continue;}
    $array=explode(",",$line);
    $key=$array[0];
    $size=$array[1];
@@ -81,6 +82,10 @@ echo "sendTime:$spendTime ms".PHP_EOL;
  * @param $size
  */
 function decodeKeyInRet(&$node,$key,$size){
+    if(!is_numeric($size)){
+        //TODO 异常
+        return ;
+    }
     //用递归的方式
     $len=strlen($key);
     $maxLen=min($len,MAX_LEVEL);
@@ -111,6 +116,10 @@ function decodeKeyInRet(&$node,$key,$size){
  */
 function putKey(&$node ,$level,$maxLevel,$key,$keyLength,$size){
         if($level>$maxLevel){
+            return ;
+        }
+        if(!is_numeric($size)){
+            //TODO 输出异常数据
             return ;
         }
     //[info=>["level"=>1,"totalSize"=>size,"keyNum"=>num,prefix="prefix"],"c2"=>[]
